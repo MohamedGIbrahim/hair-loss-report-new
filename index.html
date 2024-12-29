@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقرير تساقط الشعر</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #34495e;
+            font-weight: bold;
+        }
+        
+        select, button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        #result {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            display: none;
+        }
+        
+        .result-section {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-right: 4px solid #3498db;
+            background-color: white;
+        }
+        
+        .result-title {
+            color: #2c3e50;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>HAIR LOSS REPORT</h1>
+        
+        <form id="hairLossForm">
+            <div class="form-group">
+                <label>العمر:</label>
+                <select name="age" required>
+                    <option value="">اختر العمر</option>
+                    <option value="young">أقل من 30</option>
+                    <option value="middle">30-50</option>
+                    <option value="old">فوق 50</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>النوع:</label>
+                <select name="gender" required>
+                    <option value="">اختر النوع</option>
+                    <option value="male">ذكر</option>
+                    <option value="female">أنثى</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>نوع التساقط:</label>
+                <select name="hairLossType" required>
+                    <option value="">اختر نوع التساقط</option>
+                    <option value="heavy">تساقط غزير</option>
+                    <option value="patches">فراغات</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>زمن الأعراض:</label>
+                <select name="duration" required>
+                    <option value="">اختر المدة</option>
+                    <option value="recent">حديثاً (أقل من شهر)</option>
+                    <option value="medium">متوسط (شهر-6 أشهر)</option>
+                    <option value="long">طويل (أكثر من 6 أشهر)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>تاريخ عائلي:</label>
+                <select name="familyHistory" required>
+                    <option value="">اختر</option>
+                    <option value="yes">نعم</option>
+                    <option value="no">لا</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>مشاكل صحية مزمنة:</label>
+                <select name="chronicIssues" required>
+                    <option value="">اختر</option>
+                    <option value="yes">نعم</option>
+                    <option value="no">لا</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>عمليات جراحية:</label>
+                <select name="surgery" required>
+                    <option value="">اختر</option>
+                    <option value="yes">نعم</option>
+                    <option value="no">لا</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>أدوية منتظمة:</label>
+                <select name="medications" required>
+                    <option value="">اختر</option>
+                    <option value="yes">نعم</option>
+                    <option value="no">لا</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>مشاكل نفسية مزمنة:</label>
+                <select name="mentalHealth" required>
+                    <option value="">اختر</option>
+                    <option value="yes">نعم</option>
+                    <option value="no">لا</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>قشرة/صدفية:</label>
+                <select name="dandruff" required>
+                    <option value="">اختر</option>
+                    <option value="yes">نعم</option>
+                    <option value="no">لا</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>فرد الشعر/الصبغات:</label>
+                <select name="chemicals" required>
+                    <option value="">اختر</option>
+                    <option value="yes">نعم</option>
+                    <option value="no">لا</option>
+                </select>
+            </div>
+            
+            <button type="submit">تحليل الحالة</button>
+        </form>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('hairLossForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            
+            let analysis = '';
+            
+            // تحليل العمر والجنس
+            if (data.age === 'young') {
+                analysis += createSection('تحليل العمر والجنس', 
+                    'يشير التحليل إلى احتمال التساقط الكربي أو الوراثي. ' +
+                    'العلاجات المقترحة تشمل استخدام المينوكسيديل والمكملات الغذائية.');
+            } else if (data.age === 'middle') {
+                analysis += createSection('تحليل العمر والجنس',
+                    'قد يكون التساقط مرتبطاً بعوامل وراثية أو كربية. ' +
+                    'ننصح بمراجعة مستويات الهرمونات ومعالجة أي أمراض مزمنة.');
+            } else {
+                analysis += createSection('تحليل العمر والجنس',
+                    'التساقط قد يكون مرتبطاً بالتقدم في العمر أو عوامل وراثية. ' +
+                    'ننصح بالنظر في علاج PRP أو زراعة الشعر.');
+            }
+            
+            // تحليل نوع التساقط
+            if (data.hairLossType === 'heavy') {
+                analysis += createSection('تحليل نوع التساقط',
+                    'التساقط الغزير قد يكون بسبب الإجهاد، نقص التغذية، أو الأدوية. ' +
+                    'ننصح بتحسين النظام الغذائي واستخدام شامبوهات طبية.');
+            } else {
+                analysis += createSection('تحليل نوع التساقط',
+                    'وجود فراغات قد يشير إلى تساقط كربي. ' +
+                    'ننصح بتناول مكملات الحديد والعناية بفروة الرأس.');
+            }
+            
+            // تحليل إضافي بناءً على العوامل الأخرى
+            if (data.familyHistory === 'yes') {
+                analysis += createSection('التاريخ العائلي',
+                    'وجود تاريخ عائلي يشير إلى تساقط وراثي. ' +
+                    'ننصح بالبدء بالعلاج المبكر مثل المينوكسيديل أو النظر في خيار الزراعة.');
+            }
+            
+            if (data.chronicIssues === 'yes' || data.medications === 'yes') {
+                analysis += createSection('الحالة الصحية',
+                    'قد يكون التساقط مرتبطاً بالأمراض المزمنة أو الأدوية. ' +
+                    'ننصح بمراجعة الطبيب المختص لتقييم تأثير الأدوية وتعديلها إذا لزم الأمر.');
+            }
+            
+            if (data.chemicals === 'yes') {
+                analysis += createSection('المعالجات الكيميائية',
+                    'استخدام الصبغات ومواد الفرد قد يؤثر على صحة الشعر. ' +
+                    'ننصح بتقليل استخدام المواد الكيميائية والاهتمام بترطيب الشعر وتغذيته.');
+            }
+            
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = analysis;
+            resultDiv.style.display = 'block';
+        });
+        
+        function createSection(title, content) {
+            return `
+                <div class="result-section">
+                    <div class="result-title">${title}</div>
+                    <div>${content}</div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
